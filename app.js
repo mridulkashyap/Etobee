@@ -9,7 +9,8 @@ var routes = require('./server/routes/index');
 
 var app = express();
 
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 8080);
+app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'client', 'views'));
@@ -56,8 +57,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(app.get('port'), function () {
-  console.log('Example app listening on port ' + app.get('port'));
+app.listen(app.get('port'), app.get('ip'), function () {
+    console.log("✔ Express server listening at %s:%d ", app.get('ip'),app.get('port'));
 });
 
 module.exports = app;

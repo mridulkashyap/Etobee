@@ -9,6 +9,8 @@ var routes = require('./server/routes/index');
 
 var app = express();
 
+app.set('port', process.env.PORT || 3000);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'client', 'views'));
 app.set('view engine', 'jade');
@@ -54,5 +56,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
+app.listen(port, function () {
+  console.log('Example app listening on port 3000!');
+});
 
 module.exports = app;

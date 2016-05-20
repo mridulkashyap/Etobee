@@ -4,16 +4,16 @@ var dbName = "etobee";
 
 var pg = require('pg');
 
-pg.connect(connectionString, function(err, client, done) { // connect to postgres db
-    if (err)
-        console.log('Error while connecting: ' + err); 
-    client.query('CREATE DATABASE ' + dbName, function(err) { // create user's db
-        if (err) {
-			// do nothing, ignore if the db is there
-		}
-        client.end(); // close the connection
-    });
-});
+// pg.connect(connectionString, function(err, client, done) { // connect to postgres db
+    // if (err)
+        // console.log('Error while connecting: ' + err); 
+    // client.query('CREATE DATABASE ' + dbName, function(err) { // create user's db
+        // if (err) {
+			//do nothing, ignore if the db is there
+		// }
+        // client.end(); // close the connection
+    // });
+// });
 	
 // create a new connection to the new db to start creating tables
 pg.connect(connectionString, function(err, client, done) {

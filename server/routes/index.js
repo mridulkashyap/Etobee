@@ -2,11 +2,11 @@ var express = require('express');
 var pg = require('pg');
 var path = require('path');
 var router = express.Router();
-var connectionString = process.env.DATABASE_URL || 'postgres://postgres:postgre@localhost:5432/todo';//require(path.join(__dirname, '../', '../', 'config'));
+var connectionString = require(path.join(__dirname, '../', '../', 'config'));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+	res.sendFile(path.join(__dirname, '../', '../', 'client', 'views', 'index.html'));
 });
 
 router.get('/helloworld', function(req, res) {
@@ -30,6 +30,7 @@ router.get('/api/v1/todos', function(req, res) {
         var query = client.query("SELECT * FROM items ORDER BY id ASC;");
 
         // Stream results back one row at a time
+
         query.on('row', function(row) {
             results.push(row);
         });
@@ -155,10 +156,6 @@ router.delete('/api/v1/todos/:todo_id', function(req, res) {
         });
     });
 
-});
-
-router.get('/', function(req, res, next) {
-  res.sendFile(path.join(__dirname, '../', '../', 'client', 'views', 'index.html'));
 });
 
 module.exports = router;

@@ -4,13 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('./config');
 
 var routes = require('./server/routes/index');
 
 var app = express();
 
-app.set('port', process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 8080);
-app.set('ip', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
+app.set('port', config.port);
+app.set('ip', config.ip);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'client', 'views'));

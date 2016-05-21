@@ -1,8 +1,9 @@
 var express = require('express');
 var pg = require('pg');
 var path = require('path');
+var config = require(path.join(__dirname, '../', '../', 'config'));
 
-var connectionString = require(path.join(__dirname, '../', '../', 'config'));
+var connectionString = config.connectionString;
 
 module.exports = {
 	getAllItems : function(callback){

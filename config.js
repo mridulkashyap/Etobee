@@ -18,7 +18,7 @@ console.log(connectionString);
 // }
 
 function createTablesCB(){
-	console.log("creating tables now");
+	//console.log("creating tables now");
 	// create a new connection to the new db to start creating tables
 	pg.connect(connectionString, function(err, client, done) {
 		if(err){
@@ -44,19 +44,18 @@ function createTablesCB(){
 	});
 }
 function noDBCallback(err) {
-	console.error('There was an error', err);
 	// will try to connect with postgre db
 	pg.connect(pgConfig + "postgres", function(err, clientp, done) { // create database using postgres database in the connString				
 		if(err){
 			//error occured in connection. nothing can be done.
-			console.log("Couldn't connect to postgres db either"); //terminate program.
+			//console.log("Couldn't connect to postgres db either"); //terminate program.
 			//clientp.end();
 			return;
 		}
 		// no error in connection, create database.
 		clientp.query('CREATE DATABASE ' + dbName, function(err) { // create actual db using postgres
 			if(err){
-				console.log("couldn't create db even with postgres in ConnectionString.", err);
+				//console.log("couldn't create db even with postgres in ConnectionString.", err);
 				// nothing can be done. terminate program
 				clientp.end();
 				return;

@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var config = require('./config');
 
 var routes = require('./server/routes/index');
-var printer = require('./server/routes/print-pdf');
+//var printer = require('./server/routes/print-pdf');
 
 var app = express();
 
@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './client', 'public')));
 
 app.use('/', routes);
-app.use('/print', printer);
+//app.use('/print', printer);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

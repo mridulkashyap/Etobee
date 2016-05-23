@@ -1,5 +1,5 @@
 var pg = require('pg');
-var dbName = "etobee";
+var dbName = "/etobee";
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var pgConfig = process.env.OPENSHIFT_POSTGRESQL_DB_URL || process.env.POSTGRES_URL;
@@ -45,7 +45,7 @@ function createTablesCB(){
 }
 function noDBCallback(err) {
 	// will try to connect with postgre db
-	pg.connect(pgConfig + "postgres", function(err, clientp, done) { // create database using postgres database in the connString				
+	pg.connect(pgConfig + "/postgres", function(err, clientp, done) { // create database using postgres database in the connString				
 		if(err){
 			//error occured in connection. nothing can be done.
 			//console.log("Couldn't connect to postgres db either"); //terminate program.

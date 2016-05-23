@@ -1,7 +1,7 @@
 var express = require('express');
 var pg = require('pg');
 var path = require('path');
-var dateFormat = require('dateFormat');
+var dateFormat = require('dateformat');
 var config = require(path.join(__dirname, '../', '../', 'config'));
 
 var connectionString = config.connectionString;

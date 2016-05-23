@@ -18,7 +18,7 @@ console.log(connectionString);
 // }
 
 function createTablesCB(){
-	//console.log("creating tables now");
+	console.log("creating tables now");
 	// create a new connection to the new db to start creating tables
 	pg.connect(connectionString, function(err, client, done) {
 		if(err){
@@ -72,6 +72,7 @@ function createDB(){
 	pg.connect(connectionString, noDBCallback, createTablesCB, function(err, client, done) {	// connect to postgres db
 		//try to connect with generic connString
 		if(err){
+			console.log("error in createDB: " + err);
 			// failed, switch to connString with postgres db
 			client.end();
 			return noDBCallback(err);;

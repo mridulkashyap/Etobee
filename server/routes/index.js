@@ -2,20 +2,16 @@ var express = require('express');
 var pg = require('pg');
 var path = require('path');
 var router = express.Router();
-var todoModel = require('../models/todoModel');
+var expenseModel = require('../models/expenseModel');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.sendFile(path.join(__dirname, '../', '../', 'client', 'views', 'index.html'));
 });
 
-router.get('/helloworld', function(req, res) {
-    res.render('helloworld', { title: 'Hello, World!' });
-});
-
-router.get('/api/v1/todos', function(req, res) {
+router.get('/api/v1/expenses', function(req, res) {
 	
-	todoModel.getAllItems(function(data){
+	expenseModel.getAllItems(function(data){
 		if(data.err != null){
 			return res.status(500).json({ success: false, data: data.err});
 		}else{
@@ -24,9 +20,9 @@ router.get('/api/v1/todos', function(req, res) {
 	});
 });
 
-router.post('/api/v1/todos', function(req, res) {
-	var input = {text: req.body.text, complete: false};
-	todoModel.postNewItem(input, function(data){
+router.post('/api/v1/expenses', function(req, res) {
+	var input = {amount: req.body.amount, name: req.body.name, date_expense:req.body.date_expense};
+	expenseModel.postNewItem(input, function(data){
 		if(data.err != null){
 			return res.status(500).json({ success: false, data: data.err});
 		}else{
@@ -35,13 +31,13 @@ router.post('/api/v1/todos', function(req, res) {
 	});
 });
 
-router.put('/api/v1/todos/:todo_id', function(req, res) {
+router.put('/api/v1/expenses/:expense_id', function(req, res) {
 	// Grab data from the URL parameters
-	var id = req.params.todo_id;
-	
+	var id = req.params.expense_id;
+	console.log('reached router');
 	// Grab data from http request
-	var input = {ID: id, text: req.body.text, complete: req.body.complete};
-    todoModel.updateItem(input, function(data){
+	var input = {id:id, amount: req.body.amount, name: req.body.name, date_expense:req.body.date_expense};
+    expenseModel.updateItem(input, function(data){
 		if(data.err != null){
 			return res.status(500).json({ success: false, data: data.err});
 		}else{
@@ -50,11 +46,11 @@ router.put('/api/v1/todos/:todo_id', function(req, res) {
 	});
 });
 
-router.delete('/api/v1/todos/:todo_id', function(req, res) {
+router.delete('/api/v1/expenses/:expense_id', function(req, res) {
 	// Grab data from the URL parameters
-	var id = req.params.todo_id;
+	var id = req.params.expense_id;
 	
-    todoModel.deleteItem(id, function(data){
+    expenseModel.deleteItem(id, function(data){
 		if(data.err != null){
 			return res.status(500).json({ success: false, data: data.err});
 		}else{

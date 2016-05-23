@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="nodeTodo">
+<html ng-app="nodeExpenses">
   <head>
-    <title>Todo App - with Node + Express + Angular + PostgreSQL</title>
+    <title>Expenses App - with Node + Express + Angular + PostgreSQL</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- styles -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -10,31 +10,51 @@
   <body ng-controller="mainController">
 
     <div class="container">
-
-      <div class="header">
-        <h1>Todo App</h1>
-        <hr>
-        <h1 class="lead">Node + Express + Angular + PostgreSQL</h1>
-      </div>
-
-      <div class="todo-form">
+	
+      <div class="expense-form">
         <form>
           <div class="form-group">
-            <input type="text" class="form-control input-lg" placeholder="Enter text..." ng-model="formData.text">
+            <input type="text" class="form-control input-lg" placeholder="enter amount" ng-model="formData.amount">
           </div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createTodo()">Add Todo</button>
+		  <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="enter name" ng-model="formData.name">
+          </div>
+		  <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="enter date of expense" ng-model="formData.date_expense">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" ng-click="createExpense()">Add Todo</button>
         </form>
       </div>
 
       <br>
-
-      <div class="todo-list">
-        <ul ng-repeat="todo in todoData">
-          <li><h3>{{ todo.text }}<a href="#" ng-click="deleteTodo(todo.id)"> Delete</a></li></h3><hr>
-        </ul>
-      </div>
-
     </div>
+	<div class="expense-list" style="width:768px; margin:auto;">
+		<table>
+			<tr ng-repeat="expense in expensesData" ng-include="getTemplate(expense)">
+				
+			</tr>
+		</table>
+		
+		<script type="text/ng-template" id="display">
+			<td>{{expense.amount}}</td>
+			<td>{{expense.name}}</td>
+			<td>{{expense.date_expense}}</td>
+			<td>
+				<button ng-click="editExpense(expense)">Edit</button>
+			</td>
+			<td><a href="#" ng-click="deleteExpense(expense.id)">delete</a></td>
+		</script>
+		<script type="text/ng-template" id="edit">
+			<td><input type="text" ng-model="selected.amount" /></td>
+			<td><input type="text" ng-model="selected.name" /></td>
+			<td><input type="text" ng-model="selected.date_expense" /></td>
+			<td>
+				<button ng-click="saveExpense($index)">Save</button>
+				<button ng-click="reset()">Cancel</button>
+			</td>
+		</script>
+		
+      </div>
 
     <!-- scripts -->
     <script src="http://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>

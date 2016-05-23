@@ -31,8 +31,8 @@ function createTablesCB(){
 		var query = client.query(
 							'CREATE TABLE IF NOT EXISTS expenses( ' +
 								'id SERIAL PRIMARY KEY, ' +
-								'amount VARCHAR(40) not null, ' +
-								'name money not null, ' +
+								'amount money not null, ' +
+								'name VARCHAR(40) not null, ' +
 								'date_expense date not null' +
 								')'
 							);

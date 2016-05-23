@@ -13,11 +13,13 @@ ul {
 }
 
 .container {
-  max-width: 400px;
-  background-color: #eeeeee;
+  max-width: 992px;
   border: 1px solid black;
 }
 
 .header {
   text-align: center;
+}
+td{
+	padding:15px;
 }

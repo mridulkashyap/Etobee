@@ -1,8 +1,8 @@
 var pg = require('pg');
-var dbName = "/etobee";
+var dbName = "etobee";
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var pgConfig = process.env.OPENSHIFT_POSTGRESQL_DB_URL || process.env.POSTGRES_URL;
+var pgConfig = process.env.OPENSHIFT_POSTGRESQL_DB_URL || process.env.POSTGRES_URL + "/";
 var tableName = process.env.OPENSHIFT_APP_NAME || 'etobee';
 var connectionString = pgConfig + dbName;
 

@@ -36,7 +36,9 @@ function createTablesCB(){
 								'date_expense date not null' +
 								')'
 							);
-		query.on('end', function() { 
+		query.on('end', function(err) { 
+			if(err)
+				console.log("err while creating tables: " + err);
 			done();
 			console.log("tables created");
 			client.end(); 
